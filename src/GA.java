@@ -1,7 +1,7 @@
 
 public class GA {
-	public static int TOURNAMENT_SIZE = 50;
-	public static double MUTATION_RATE = 0.002;
+	public static int TOURNAMENT_SIZE = 100;
+	public static double MUTATION_RATE = 0.02;
 	
 	public static Population evolve(Population population){
 		Population newPopulation = new Population(population.popSize);

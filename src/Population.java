@@ -28,7 +28,7 @@ public class Population {
 	public Numbers getFittest(){
 		Numbers fittest = residents.get(0);
 		for(int i=0;i<popSize;++i){
-			if(fittest.getFitness()>residents.get(i).getFitness())
+			if(residents.get(i).getFitness()<fittest.getFitness())
 				fittest = residents.get(i);
 		}
 		return fittest;

@@ -3,7 +3,7 @@ import java.util.Collections;
 
 
 public class Numbers {
-	private int size=10;
+	private int size=100;
 	private ArrayList <Integer> data;
 	private int RAND_MAX=100;
 	double fitness = -1;
@@ -62,8 +62,62 @@ public class Numbers {
 	 * Less is better :P
 	 * */
 	public double getFitness(){
-
+		return heuristics3();
+		
+	}
+	
+	
+	/*
+	 * It was made by mistake but it works great :D.
+	 * */
+	public double heuristics3(){
 		if(fitness!=-1)
+			return fitness;
+		int sum = 0;
+		for(Integer i: this.data){
+			sum +=i;
+		}
+		int j=1;
+		int new_sum=0;
+		int temp_sum = 0;
+		
+		for(int i=0;i<size-1;++i){
+			if(data.get(i)<data.get(i+1)){
+				new_sum += j*temp_sum;
+				j++;
+				temp_sum = 0;
+			}else{
+				temp_sum += data.get(i);
+			}
+		}
+		new_sum += temp_sum;
+		//System.out.println(sum +" "+new_sum);
+		return (double)new_sum/sum;
+		
+	}
+	
+	public double heuristics2(){
+		if(fitness!=-1)
+			return fitness;
+		int k=size;
+		int i=0,j=0;
+		int average = 0;
+		while(k>0){
+			while(i==j){
+				i = (int)(Math.random()*this.size);
+				j = (int)(Math.random()*this.size);
+			}
+			if(this.data.get(Math.min(i, j))<this.data.get(Math.max(i, j))){
+				average++;
+			}
+			k--;
+		}
+		this.fitness = (double)1/average;
+		return this.fitness;
+	}
+	
+	public double heuristics1(){
+		if(this.fitness!=-1)
 			return fitness;
 		int count = 0; //
 		for(int i=0;i<size-1;++i){
@@ -75,6 +129,5 @@ public class Numbers {
 		fitness = (double)count/size;
 		return fitness;
 	}
-	
 
 }
